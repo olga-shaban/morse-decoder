@@ -38,8 +38,14 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+ 
+  return expr.trim().split('   ').map(function(word) {
+    return word.split(' ').map(function(letter) {
+      return MORSE_CODE[letter];
+    }).join('');
+  }).join(' ');
 }
+
 
 module.exports = {
     decode

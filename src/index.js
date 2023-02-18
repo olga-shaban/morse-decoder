@@ -37,15 +37,26 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
- 
-  return expr.trim().split('   ').map(function(word) {
-    return word.split(' ').map(function(letter) {
-      return MORSE_CODE[letter];
-    }).join('');
-  }).join(' ');
+function decode(expr) { 
+  let phrase = [];
+  let str = '';
+for (i=0 ; i<expr.length; i = i+10) {
+  let m = expr.substring(i, i+10).replaceAll('11', '-').replaceAll('10', '.').replaceAll('00', '');// преобразовали в азбуку Морзе
+   phrase.push(m);
+  
+ for (j=0; j<phrase.length; j++) {
+  for (let key in MORSE_TABLE) {
+   if (key === phrase[j]) 
+   {
+        phrase[j] = MORSE_TABLE[key];  
+   }  
+  }
+ str = phrase.join('');
+ } 
+}  
+let result =  str.split('**********').join(' ');  
+return result;
 }
-
 
 module.exports = {
     decode
